@@ -863,15 +863,42 @@
   }
   .tweak-row input[type=range] { padding: 2px 0; border: none; background: none; }
 
-  /* Scroll animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
+  /* ─── PRINT ─── */
+  @media print {
+    @page { size: A4 portrait; margin: 1cm; }
+    html { font-size: 14px !important; }
+    * , *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      animation-delay: -99s !important;
+      animation-duration: .001s !important;
+      animation-iteration-count: 1 !important;
+      animation-fill-mode: both !important;
+      transition-duration: 0s !important;
+    }
+    /* Reveal all scroll-animated content */
+    .reveal { opacity: 1 !important; transform: none !important; }
+    /* Fill skill bars at print time */
+    .skill-bar-fill { transition: none !important; }
+    /* Hide interactive chrome */
+    nav, .nav-overlay, .nav-menu-btn, #tweaks-panel { display: none !important; }
+    /* Open all service rows */
+    .service-body { max-height: none !important; }
+    .service-icon { display: none !important; }
+    body { background: #fff !important; }
+    /* Keep sections from breaking awkwardly */
+    #hero, #projects, #services, #experience, #contact { break-inside: avoid; }
+    .project-card, .skill-card, .exp-row, .service-row, .service-example { break-inside: avoid; }
+    .projects-grid { gap: 8px; }
+    section, footer { padding-top: 24px !important; padding-bottom: 24px !important; }
+    /* Start major sections on fresh pages */
+    #projects { break-before: page; }
+    #services { break-before: page; }
+    #experience { break-before: page; }
+    #contact { break-inside: avoid; }
+    .contact-block { background: #111 !important; }
+    .metric-card, .hero-years { background: #111 !important; }
+    a { text-decoration: none !important; }
   }
 </style>
 </head>
@@ -1070,7 +1097,7 @@
 
     <!-- Card 6 — Sportwey -->
     <div class="project-card reveal" onclick="location.href='case-studies/Sportwey.html'" style="cursor:pointer;">
-      <div class="project-thumb" style="background:rgb(246, 255, 220); padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <div class="project-thumb" style="background:#f5ede4; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
         <img src="case-studies/img/sportwey-mark.png" alt="Sportwey" style="width:84px;height:84px;object-fit:contain;">
       </div>
       <div class="project-body">
@@ -1535,6 +1562,33 @@
     applyTweaks({ fontScale: +document.getElementById('tweak-scale').value, cardStyle: document.getElementById('tweak-cards').value, colorMode: v });
     window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { colorMode: v } }, '*');
   });
+
+  // ─── PRINT PREP ───
+  (function preparePrint() {
+    // Force all scroll-reveal content visible
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    // Fill all skill bars
+    document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+      if (bar.dataset.pct) bar.style.width = bar.dataset.pct + '%';
+    });
+    // Open every service row so all examples show
+    document.querySelectorAll('.service-row').forEach(r => {
+      r.classList.add('open');
+      const body = r.querySelector('.service-body');
+      if (body) body.style.maxHeight = 'none';
+    });
+
+    function go() {
+      const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+      const imgs = Array.from(document.images).map(img =>
+        img.complete ? Promise.resolve() : new Promise(res => { img.onload = img.onerror = res; })
+      );
+      Promise.all([fonts, ...imgs]).then(() => setTimeout(() => window.print(), 500));
+    }
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go);
+  })();
+
 </script>
 </body>
 </html>

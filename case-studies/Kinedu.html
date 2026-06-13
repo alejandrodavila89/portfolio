@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kinedu — Alejandro Dávila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --card: #f2f1ed; --ink: #111111;
+    --mid: #555555; --muted: #888888; --border: #e5e4e0;
+    --accent: #ece9f5; --accent-dark: #5a4db0;
+    --radius: 14px; --font: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
+  .nav-logo { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+  .nav-back { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+  .nav-back:hover { color: var(--ink); }
+
+  .hero { padding: 64px 40px 0; max-width: 1100px; margin: 0 auto; }
+  .hero-meta { display: flex; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .hero-title { font-size: clamp(36px, 5vw, 58px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+  .hero-subtitle { font-size: 17px; color: var(--mid); line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tag { font-size: 11px; font-weight: 500; color: var(--muted); background: var(--card); border: 0.5px solid var(--border); border-radius: 100px; padding: 4px 12px; }
+
+  .hero-banner { background: var(--accent); border-radius: 16px; height: 480px; display: flex; align-items: center; justify-content: center; margin: 0 40px; overflow: hidden; }
+  .placeholder-label { font-size: 11px; font-weight: 500; color: var(--accent-dark); opacity: 0.5; letter-spacing: 0.08em; text-transform: uppercase; font-family: monospace; margin-top: 10px; }
+  .ph-icon { opacity: 0.2; }
+
+  .content { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .section { padding: 72px 0; border-top: 0.5px solid var(--border); }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+  .section-label::before { content: '↳'; }
+  .section-heading { font-size: clamp(24px, 3vw, 34px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+  .section-body { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 640px; }
+  .section-body p + p { margin-top: 14px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .img-placeholder { background: var(--card); border-radius: var(--radius); border: 0.5px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .img-placeholder.tall { height: 320px; }
+  .img-placeholder.short { height: 200px; }
+  .ph-label { font-family: monospace; font-size: 10px; color: var(--muted); opacity: 0.6; text-align: center; padding: 0 16px; }
+
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .process-step { background: var(--card); border-radius: var(--radius); padding: 24px 22px; border: 0.5px solid var(--border); }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
+  .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .metric-card { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 28px 24px; }
+  .metric-num { font-size: 40px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+  .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
+
+  /* Role highlights */
+  .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+  .role-card { background: var(--card); border-radius: var(--radius); padding: 20px 22px; border: 0.5px solid var(--border); }
+  .role-card-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .role-card-body { font-size: 12.5px; color: var(--mid); line-height: 1.55; }
+
+  .next-project { background: var(--card); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; margin: 56px 0; text-decoration: none; border: 0.5px solid var(--border); transition: background 0.2s; }
+  .next-project:hover { background: #eceae5; }
+  .next-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .next-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+  .next-arrow { font-size: 28px; color: var(--muted); }
+
+  footer { border-top: 0.5px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 11px; color: #bbb; }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .footer-nav a:hover { color: var(--ink); }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* Leadership timeline */
+  .timeline-row { display: grid; grid-template-columns: 100px 1fr; gap: 24px; padding: 22px 0; border-bottom: 0.5px solid var(--border); align-items: start; }
+  .timeline-row:first-of-type { border-top: 0.5px solid var(--border); }
+  .timeline-year { font-size: 13px; font-weight: 600; color: var(--muted); padding-top: 1px; }
+  .timeline-title { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; color: var(--ink); margin-bottom: 7px; }
+  .timeline-body { font-size: 13.5px; color: var(--mid); line-height: 1.65; max-width: 720px; }
+  @media (max-width: 768px) { .timeline-row { grid-template-columns: 1fr; gap: 6px; } }
+
+  @media (max-width: 768px) {
+    nav, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero-banner { margin: 0 20px; height: 280px; }
+    .two-col { grid-template-columns: 1fr; }
+    .process-steps, .metrics, .role-grid { grid-template-columns: 1fr; }
+    .next-project { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../Portfolio.html"><div class="nav-logo-dot"></div></a>
+  <a class="nav-back" href="../Portfolio.html">← All case studies</a>
+</nav>
+
+<div class="hero">
+  <img src="img/logo-kinedu.png" alt="Kinedu" class="reveal" style="height:30px;width:auto;display:block;margin-bottom:32px;">
+  <div class="hero-meta reveal">
+    <div class="hero-meta-item"><span class="meta-label">Client</span><span class="meta-value">Kinedu</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Role</span><span class="meta-value">UX Product Lead</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Years</span><span class="meta-value">2018 — 2022</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Platform</span><span class="meta-value">iOS · Android · Web</span></div>
+  </div>
+  <h1 class="hero-title reveal">Kinedu</h1>
+  <p class="hero-subtitle reveal">Building a design team, a cross-platform design system, and a product used by millions of parents — from first designer hired to leading a team of three across four years of growth.</p>
+  <div class="hero-tags reveal">
+    <span class="tag">Education</span><span class="tag">Mobile</span><span class="tag">Design Lead</span><span class="tag">Design System</span>
+  </div>
+</div>
+
+<div class="hero-banner reveal" style="background:#ece9f5;padding:0;overflow:hidden;">
+  <img src="img/kinedu-hero.png" alt="Kinedu app overview" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <p class="section-label reveal">Overview</p>
+    <div class="two-col">
+      <div class="reveal">
+        <h2 class="section-heading">From first designer to design lead — in a product used by millions</h2>
+        <div class="section-body">
+          <p>Kinedu is a baby development app guiding parents through age-appropriate activities, milestones, and expert content for children 0–4. When I joined, there was no design team, no design system, and no shared process. I was the first dedicated product designer.</p>
+          <p>Over 4 years I grew into the UX Lead role — hiring and managing a team of 3 designers, building Kinedu's first cross-platform design system from scratch, and leading design across iOS, Android, and Web as the product expanded into new markets and enterprise.</p>
+          <p>This wasn't just about making screens. It was about building the design infrastructure — the team, the system, the process — that let a growing company design and ship at scale.</p>
+        </div>
+      </div>
+      <div class="img-placeholder tall reveal" style="padding:0;overflow:hidden;">
+        <img src="img/kinedu-team.jpg" alt="Kinedu design team" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+      </div>
+    </div>
+
+    <div class="role-grid" style="margin-top:48px;">
+      <div class="role-card reveal">
+        <div class="role-card-title">Team leadership</div>
+        <div class="role-card-body">Hired and managed a team of 3 designers. Ran weekly design critiques, established review processes, defined documentation standards, and mentored junior designers through structured feedback cycles.</div>
+      </div>
+      <div class="role-card reveal">
+        <div class="role-card-title">Design system ownership</div>
+        <div class="role-card-body">Built Kinedu's first shared component library — 80+ components in Figma — and drove adoption across iOS, Android, and Web engineering teams. Owned governance, versioning, and contribution guidelines.</div>
+      </div>
+      <div class="role-card reveal">
+        <div class="role-card-title">Product strategy</div>
+        <div class="role-card-body">Partnered with PMs on roadmap and discovery — turning research and business goals into product direction, and aligning design decisions with measurable outcomes.</div>
+      </div>
+      <div class="role-card reveal">
+        <div class="role-card-title">Cross-platform consistency</div>
+        <div class="role-card-body">Established standards for how components and patterns translate between iOS, Android, and Web — maintaining a coherent experience while respecting each platform's native conventions.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+
+  <!-- LEADERSHIP STORY -->
+  <div class="section">
+    <p class="section-label reveal">Leadership story</p>
+    <h2 class="section-heading reveal">Building a team that could design without me in the room</h2>
+    <p class="section-body reveal">The biggest challenge at Kinedu wasn't designing features — it was building the infrastructure so the team could design consistently, independently, and at pace. As the company grew and added an enterprise product and a web platform, design became a bottleneck. My job was to remove that bottleneck.</p>
+    <div style="margin-top:36px;">
+      <div class="timeline-row reveal">
+        <div class="timeline-year">2018</div>
+        <div>
+          <div class="timeline-title">Joined as first product designer</div>
+          <div class="timeline-body">No design system, no process, no documentation. Ran user research with parents across Mexico and Latin America while designing core features — activity feed, milestone tracker, onboarding.</div>
+        </div>
+      </div>
+      <div class="timeline-row reveal">
+        <div class="timeline-year">2019</div>
+        <div>
+          <div class="timeline-title">Built the first design system</div>
+          <div class="timeline-body">Identified inconsistency as the root cause of slow delivery. Proposed and led a 3-month initiative to establish design tokens, build 80+ shared components in Figma, and create contribution guidelines. This became the foundation all future product work was built on.</div>
+        </div>
+      </div>
+      <div class="timeline-row reveal">
+        <div class="timeline-year">2020</div>
+        <div>
+          <div class="timeline-title">Hired first junior designer — defined how we work</div>
+          <div class="timeline-body">Wrote our first design process documentation. Introduced weekly critique sessions, design review checkpoints, and a Figma-to-engineering handoff protocol. Established the habits that scaled as the team grew.</div>
+        </div>
+      </div>
+      <div class="timeline-row reveal">
+        <div class="timeline-year">2021</div>
+        <div>
+          <div class="timeline-title">Grew to 3 designers — expanded to Web and Enterprise</div>
+          <div class="timeline-body">Hired a second designer as Kinedu launched a web product and enterprise offering. Coordinated design across three platforms simultaneously. Ran design system governance — handling conflicting requests from iOS, Android, and Web engineers with a shared decision framework.</div>
+        </div>
+      </div>
+      <div class="timeline-row reveal">
+        <div class="timeline-year">2022</div>
+        <div>
+          <div class="timeline-title">Left a team and system that outlasted me</div>
+          <div class="timeline-body">When I left, the design system was fully adopted across all platforms. The team ran independently. The process I built continued to operate. That's the measure of leadership — the infrastructure keeps working after you're gone.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CROSS-PLATFORM SYSTEM -->
+  <div class="section">
+    <p class="section-label reveal">Cross-platform system</p>
+    <h2 class="section-heading reveal">One design system, three platforms</h2>
+    <p class="section-body reveal">As design lead I built Kinedu’s first shared design system — 80+ components in Figma — and rolled it out across iOS, Android and Web, keeping the experience consistent while respecting each platform’s native conventions.</p>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/kinedu-crossplatform.png" alt="Kinedu cross-platform design system" style="width:100%;display:block;">
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Process</p>
+    <h2 class="section-heading reveal">4 years of iterative product design</h2>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01 — Research</div>
+        <div class="step-title">Understanding parents</div>
+        <div class="step-body">Conducted ongoing user research with parents across Mexico, USA, and Latin America. Ran usability tests, in-depth interviews, and analyzed behavioral analytics from 1M+ users.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02 — System</div>
+        <div class="step-title">Building the design system</div>
+        <div class="step-body">Defined color, typography, spacing tokens. Built 80+ components in Figma. Documented usage guidelines, dos/don'ts, and created a handoff workflow with engineering.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03 — Ship</div>
+        <div class="step-title">Feature design & delivery</div>
+        <div class="step-body">Led design of key features including activity feed, milestone tracker, expert content hub, and subscription flows — all validated through usability testing and A/B experiments.</div>
+      </div>
+    </div>
+
+      <div class="img-placeholder short reveal" style="background:#ece9f5;padding:0;overflow:hidden;">
+        <img src="img/kinedu-design-system.png" alt="Design system" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="img-placeholder short reveal" style="background:#ece9f5;padding:0;overflow:hidden;">
+        <img src="img/kinedu-wireframes.png" alt="Wireframes" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+
+    <div style="margin-top: 10px;">
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="img-placeholder reveal" style="height:240px;padding:0;overflow:hidden;">
+          <img src="img/kinedu-screen-0.png" alt="Milestone tracker" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="img-placeholder reveal" style="height:240px;padding:0;overflow:hidden;">
+          <img src="img/kinedu-screen-1.png" alt="Activity detail" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="img-placeholder reveal" style="height:240px;padding:0;overflow:hidden;">
+          <img src="img/kinedu-screen-2.png" alt="Expert content" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-heading reveal">4 years of impact across product and team</h2>
+    <p class="section-body reveal">Kinedu grew significantly during my tenure — expanding into new markets and adding enterprise and web products. The design system and team I built became the foundation for all future product work.</p>
+
+    <div class="metrics">
+      <div class="metric-card reveal">
+        <div class="metric-num">3×</div>
+        <div class="metric-label">design team growth — from 1 to 3 designers under my leadership</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="metric-num">80+</div>
+        <div class="metric-label">components built in the first cross-platform Figma design system</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="metric-num">3</div>
+        <div class="metric-label">platforms covered: iOS, Android, and Web — with consistent UI patterns</div>
+      </div>
+    </div>
+  </div>
+
+  <a class="next-project reveal" href="SpinPreemia.html">
+    <div>
+      <div class="next-label">Next case study</div>
+      <div class="next-title">Spin Premia — Loyalty analytics platform</div>
+    </div>
+    <div class="next-arrow">→</div>
+  </a>
+
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 Alejandro Dávila</span>
+  <nav class="footer-nav">
+    <a href="../Portfolio.html">Home</a>
+    <a href="../Portfolio.html#projects">Case Studies</a>
+    <a href="../Portfolio.html#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

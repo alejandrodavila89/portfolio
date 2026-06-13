@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmacias del Ahorro — Alejandro Dávila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --card: #f2f1ed; --ink: #111111;
+    --mid: #555555; --muted: #888888; --border: #e5e4e0;
+    --accent: #e4ecf5; --accent-dark: #3a7abf;
+    --radius: 14px; --font: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
+  .nav-logo { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+  .nav-back { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .nav-back:hover { color: var(--ink); }
+  .hero { padding: 64px 40px 0; max-width: 1100px; margin: 0 auto; }
+  .hero-meta { display: flex; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .hero-title { font-size: clamp(36px, 5vw, 58px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+  .hero-subtitle { font-size: 17px; color: var(--mid); line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tag { font-size: 11px; font-weight: 500; color: var(--muted); background: var(--card); border: 0.5px solid var(--border); border-radius: 100px; padding: 4px 12px; }
+  .hero-banner { background: var(--accent); border-radius: 16px; height: 480px; display: flex; align-items: center; justify-content: center; margin: 0 40px; overflow: hidden; }
+  .content { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .section { padding: 72px 0; border-top: 0.5px solid var(--border); }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+  .section-label::before { content: '↳'; }
+  .section-heading { font-size: clamp(24px, 3vw, 34px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+  .section-body { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 640px; }
+  .section-body p + p { margin-top: 14px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .img-placeholder { background: var(--card); border-radius: var(--radius); border: 0.5px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; overflow: hidden; }
+  .img-placeholder.tall { height: 320px; }
+  .img-placeholder.short { height: 200px; }
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .process-step { background: var(--card); border-radius: var(--radius); padding: 24px 22px; border: 0.5px solid var(--border); }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
+  .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .metric-card { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 28px 24px; }
+  .metric-num { font-size: 40px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; }
+  .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
+  .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+  .challenge-card { border-radius: var(--radius); padding: 24px; border: 0.5px solid var(--border); }
+  .challenge-card.prob { background: var(--card); }
+  .challenge-card.sol { background: var(--ink); color: #fff; }
+  .card-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; opacity: 0.5; }
+  .card-text { font-size: 14px; line-height: 1.65; }
+  .challenge-card.sol .card-text { color: #aaa; }
+  .next-project { background: var(--card); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; margin: 56px 0; text-decoration: none; border: 0.5px solid var(--border); transition: background 0.2s; }
+  .next-project:hover { background: #eceae5; }
+  .next-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .next-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+  .next-arrow { font-size: 28px; color: var(--muted); }
+  footer { border-top: 0.5px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 11px; color: #bbb; }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .footer-nav a:hover { color: var(--ink); }
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (max-width: 768px) {
+    nav, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero-banner { margin: 0 20px; height: 280px; }
+    .two-col, .challenge-grid, .metrics, .process-steps { grid-template-columns: 1fr; }
+    .next-project { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../Portfolio.html"><div class="nav-logo-dot"></div></a>
+  <a class="nav-back" href="../Portfolio.html">← All case studies</a>
+</nav>
+
+<div class="hero">
+  <img src="img/logo-farmacias.png" alt="Farmacias del Ahorro" class="reveal" style="height:48px;width:auto;display:block;margin-bottom:32px;">
+  <div class="hero-meta reveal">
+    <div class="hero-meta-item"><span class="meta-label">Client</span><span class="meta-value">Farmacias del Ahorro</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Role</span><span class="meta-value">Sr. UX Designer (via Wizeline)</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Years</span><span class="meta-value">2022 — 2024</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Platform</span><span class="meta-value">Web · Mobile · CMS</span></div>
+  </div>
+  <h1 class="hero-title reveal">Farmacias<br>del Ahorro</h1>
+  <p class="hero-subtitle reveal">Overhauling the e-commerce platform of one of Mexico's largest pharmacy chains — rebuilding the checkout flow, information architecture, and design system.</p>
+  <div class="hero-tags reveal">
+    <span class="tag">Health</span><span class="tag">Pharmacy</span><span class="tag">CMS</span><span class="tag">E-commerce</span>
+  </div>
+</div>
+
+<div class="hero-banner reveal" style="padding:0;">
+  <img src="img/farmacias-hero.png" alt="Farmacias del Ahorro platform" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+</div>
+
+<div class="content">
+  <div class="section">
+    <p class="section-label reveal">Overview</p>
+    <div class="two-col">
+      <div class="reveal">
+        <h2 class="section-heading">Modernizing a pharmacy giant's digital storefront</h2>
+        <div class="section-body">
+          <p>Farmacias del Ahorro is one of Mexico's largest pharmacy chains, with thousands of physical stores and a growing e-commerce presence. Their online platform suffered from a confusing checkout, fragmented navigation, and an inconsistent interface.</p>
+          <p>Working via Wizeline, I led the redesign of the core shopping experience — focusing on the checkout flow, restructuring the information architecture, and establishing a scalable design system to unify the platform.</p>
+          <p>The goal was to reduce friction at every step a customer takes from finding a product to completing their purchase.</p>
+        </div>
+      </div>
+      <div class="img-placeholder tall reveal" style="padding:0;">
+        <img src="img/farmacias-screen-0.png" alt="Catalog screen" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+
+    <div class="challenge-grid" style="margin-top:48px;">
+      <div class="challenge-card prob reveal">
+        <div class="card-eyebrow">The problem</div>
+        <div class="card-text">A multi-step checkout with high abandonment, confusing product categorization, and an interface built inconsistently across teams — making it hard for customers to find and buy what they needed.</div>
+      </div>
+      <div class="challenge-card sol reveal">
+        <div class="card-eyebrow">The solution</div>
+        <div class="card-text">A streamlined checkout, a restructured product taxonomy validated with real users, and a unified design system that brought visual and interaction consistency across the entire platform.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- INFORMATION ARCHITECTURE -->
+  <div class="section">
+    <p class="section-label reveal">Information architecture</p>
+    <h2 class="section-heading reveal">Restructuring the product taxonomy</h2>
+    <p class="section-body reveal">The original catalog buried products under confusing categories. I rebuilt the taxonomy with card sorting and tree testing, so customers could reach medication and health products in fewer, clearer steps.</p>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/farmacias-ia.png" alt="Farmacias information architecture sitemap" style="width:100%;display:block;">
+    </div>
+  </div>
+
+  <!-- CHECKOUT FUNNEL -->
+  <div class="section">
+    <p class="section-label reveal">Checkout funnel</p>
+    <h2 class="section-heading reveal">Turning a leaky checkout into a conversion path</h2>
+    <p class="section-body reveal">I broke the checkout into its individual stages to see exactly where customers dropped off, then redesigned each step. Completion climbed from 30% to 65% across the funnel.</p>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/farmacias-funnel.png" alt="Checkout funnel before and after" style="width:100%;display:block;">
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Process</p>
+    <h2 class="section-heading reveal">From audit to a unified system</h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01 — Audit</div>
+        <div class="step-title">Research & analytics</div>
+        <div class="step-body">Audited the existing checkout and navigation, analyzed drop-off analytics, and ran usability sessions to pinpoint where and why customers abandoned their carts.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02 — Structure</div>
+        <div class="step-title">Information architecture</div>
+        <div class="step-body">Rebuilt the product taxonomy and navigation through card sorting and tree testing, making it faster for users to locate medication and health products.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03 — System</div>
+        <div class="step-title">Design system & checkout</div>
+        <div class="step-body">Designed a streamlined checkout flow and built a component library so the platform could scale consistently across web, mobile, and the CMS.</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/farmacias-screen-2.png" alt="Account screen" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/farmacias-wireframe.png" alt="Checkout wireframe" style="width:100%;height:100%;object-fit:cover;"></div>
+    </div>
+
+    <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/farmacias-screen-0.png" alt="Catalog" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/farmacias-screen-1.png" alt="Checkout" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/farmacias-screen-2.png" alt="Account" style="width:100%;height:100%;object-fit:cover;"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-heading reveal">A faster, clearer path to purchase</h2>
+    <p class="section-body reveal">The redesigned platform dramatically improved checkout completion and navigation speed, directly contributing to a significant lift in online sales.</p>
+    <div class="metrics">
+      <div class="metric-card reveal"><div class="metric-num">65%</div><div class="metric-label">checkout completion rate after the flow redesign</div></div>
+      <div class="metric-card reveal"><div class="metric-num">28%</div><div class="metric-label">faster navigation to find products across the catalog</div></div>
+      <div class="metric-card reveal"><div class="metric-num">75%</div><div class="metric-label">improvement in online sales performance</div></div>
+    </div>
+  </div>
+
+  <a class="next-project reveal" href="Assetmark.html">
+    <div><div class="next-label">Next case study</div><div class="next-title">Assetmark — Advisor platform</div></div>
+    <div class="next-arrow">→</div>
+  </a>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 Alejandro Dávila</span>
+  <nav class="footer-nav">
+    <a href="../Portfolio.html">Home</a>
+    <a href="../Portfolio.html#projects">Case Studies</a>
+    <a href="../Portfolio.html#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

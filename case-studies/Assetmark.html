@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assetmark — Alejandro Dávila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --card: #f2f1ed; --ink: #111111;
+    --mid: #555555; --muted: #888888; --border: #e5e4e0;
+    --accent: #e8eaec; --accent-dark: #555f6a;
+    --radius: 14px; --font: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
+  .nav-logo { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+  .nav-back { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .nav-back:hover { color: var(--ink); }
+  .hero { padding: 64px 40px 0; max-width: 1100px; margin: 0 auto; }
+  .hero-meta { display: flex; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .hero-title { font-size: clamp(36px, 5vw, 58px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+  .hero-subtitle { font-size: 17px; color: var(--mid); line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tag { font-size: 11px; font-weight: 500; color: var(--muted); background: var(--card); border: 0.5px solid var(--border); border-radius: 100px; padding: 4px 12px; }
+  .hero-banner { background: var(--accent); border-radius: 16px; height: 480px; display: flex; align-items: center; justify-content: center; margin: 0 40px; overflow: hidden; }
+  .content { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+  .section { padding: 72px 0; border-top: 0.5px solid var(--border); }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+  .section-label::before { content: '↳'; }
+  .section-heading { font-size: clamp(24px, 3vw, 34px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+  .section-body { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 640px; }
+  .section-body p + p { margin-top: 14px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .img-placeholder { background: var(--card); border-radius: var(--radius); border: 0.5px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; overflow: hidden; }
+  .img-placeholder.tall { height: 320px; }
+  .img-placeholder.short { height: 200px; }
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .process-step { background: var(--card); border-radius: var(--radius); padding: 24px 22px; border: 0.5px solid var(--border); }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
+  .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
+  .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 32px; }
+  .metric-card { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 32px 28px; }
+  .metric-num { font-size: 38px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 8px; }
+  .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
+  .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+  .challenge-card { border-radius: var(--radius); padding: 24px; border: 0.5px solid var(--border); }
+  .challenge-card.prob { background: var(--card); }
+  .challenge-card.sol { background: var(--ink); color: #fff; }
+  .card-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; opacity: 0.5; }
+  .card-text { font-size: 14px; line-height: 1.65; }
+  .challenge-card.sol .card-text { color: #aaa; }
+  .next-project { background: var(--card); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; margin: 56px 0; text-decoration: none; border: 0.5px solid var(--border); transition: background 0.2s; }
+  .next-project:hover { background: #eceae5; }
+  .next-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .next-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+  .next-arrow { font-size: 28px; color: var(--muted); }
+  footer { border-top: 0.5px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 11px; color: #bbb; }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .footer-nav a:hover { color: var(--ink); }
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (max-width: 768px) {
+    nav, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero-banner { margin: 0 20px; height: 280px; }
+    .two-col, .challenge-grid, .metrics, .process-steps { grid-template-columns: 1fr; }
+    .next-project { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../Portfolio.html"><div class="nav-logo-dot"></div></a>
+  <a class="nav-back" href="../Portfolio.html">← All case studies</a>
+</nav>
+
+<div class="hero">
+  <img src="img/logo-assetmark.png" alt="Assetmark" class="reveal" style="height:48px;width:auto;display:block;margin-bottom:32px;">
+  <div class="hero-meta reveal">
+    <div class="hero-meta-item"><span class="meta-label">Client</span><span class="meta-value">Assetmark</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Role</span><span class="meta-value">Sr. UX Designer (via Wizeline)</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Years</span><span class="meta-value">2022 — 2024</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Platform</span><span class="meta-value">Web · B2B Dashboard</span></div>
+  </div>
+  <h1 class="hero-title reveal">Assetmark</h1>
+  <p class="hero-subtitle reveal">Simplifying the workflows of a financial advisor platform — helping advisors manage portfolios and client accounts with greater clarity and speed.</p>
+  <div class="hero-tags reveal">
+    <span class="tag">Fintech</span><span class="tag">Dashboard</span><span class="tag">B2B</span><span class="tag">Wealth Management</span>
+  </div>
+</div>
+
+<div class="hero-banner reveal" style="padding:0;">
+  <img src="img/assetmark-hero.png" alt="Assetmark dashboard" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+</div>
+
+<div class="content">
+  <div class="section">
+    <p class="section-label reveal">Overview</p>
+    <div class="two-col">
+      <div class="reveal">
+        <h2 class="section-heading">Clearer workflows for financial advisors</h2>
+        <div class="section-body">
+          <p>Assetmark provides a wealth management platform used by financial advisors to manage client portfolios, run reports, and execute investment strategies. The existing tools were powerful but dense — burying common tasks behind complex, multi-step workflows.</p>
+          <p>My role was to simplify these workflows, reducing the cognitive load advisors face daily and making the most frequent actions faster and more intuitive — without sacrificing the depth that professional users rely on.</p>
+        </div>
+      </div>
+      <div class="img-placeholder tall reveal" style="padding:0;">
+        <img src="img/assetmark-screen-0.png" alt="Advisor dashboard" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+
+    <div class="challenge-grid" style="margin-top:48px;">
+      <div class="challenge-card prob reveal">
+        <div class="card-eyebrow">The problem</div>
+        <div class="card-text">Core advisor tasks — building portfolios, generating reports, managing accounts — were spread across dense, inconsistent screens that required too many steps and too much memorization.</div>
+      </div>
+      <div class="challenge-card sol reveal">
+        <div class="card-eyebrow">The solution</div>
+        <div class="card-text">Streamlined, task-focused workflows backed by a scalable design system — surfacing the right data at the right moment and standardizing patterns across the entire platform.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- WORKFLOW REDESIGN -->
+  <div class="section">
+    <p class="section-label reveal">Workflow redesign</p>
+    <h2 class="section-heading reveal">From nine steps to three</h2>
+    <p class="section-body reveal">Core advisor tasks were spread across dense, multi-step screens. I audited the real workflows and collapsed the most frequent one — building and adjusting a client portfolio — from nine steps across three screens into three steps on a single focused view.</p>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/assetmark-beforeafter.png" alt="Advisor workflow before and after" style="width:100%;display:block;">
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Process</p>
+    <h2 class="section-heading reveal">Untangling complex B2B workflows</h2>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01 — Discover</div>
+        <div class="step-title">Understanding advisors</div>
+        <div class="step-body">Interviewed financial advisors to map their daily workflows, identifying the highest-frequency tasks and the steps where they lost the most time.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02 — Simplify</div>
+        <div class="step-title">Workflow redesign</div>
+        <div class="step-body">Reworked portfolio management and reporting flows to reduce steps, clarify hierarchy, and present complex financial data in a digestible way.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03 — Scale</div>
+        <div class="step-title">Design system</div>
+        <div class="step-body">Built a scalable component library and data-table patterns so new features could be designed and shipped consistently across the platform.</div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/assetmark-wireframe.png" alt="Workflow wireframe" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/assetmark-screen-1.png" alt="Portfolio view" style="width:100%;height:100%;object-fit:cover;"></div>
+    </div>
+
+    <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/assetmark-screen-0.png" alt="Dashboard" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/assetmark-screen-2.png" alt="Reports" style="width:100%;height:100%;object-fit:cover;"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-heading reveal">Intuitive workflows, built to scale</h2>
+    <p class="section-body reveal">The redesigned workflows made everyday advisor tasks more intuitive, while the design system gave the platform a consistent foundation to grow on.</p>
+    <div class="metrics">
+      <div class="metric-card reveal"><div class="metric-num">More intuitive</div><div class="metric-label">workflows for portfolio management and daily advisor tasks</div></div>
+      <div class="metric-card reveal"><div class="metric-num">Scalable</div><div class="metric-label">design system enabling consistent, faster feature delivery</div></div>
+    </div>
+  </div>
+
+  <a class="next-project reveal" href="SpinPreemia.html">
+    <div><div class="next-label">Next case study</div><div class="next-title">Spin Premia — Loyalty analytics</div></div>
+    <div class="next-arrow">→</div>
+  </a>
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 Alejandro Dávila</span>
+  <nav class="footer-nav">
+    <a href="../Portfolio.html">Home</a>
+    <a href="../Portfolio.html#projects">Case Studies</a>
+    <a href="../Portfolio.html#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

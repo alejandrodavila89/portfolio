@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAZ Financial Services — Alejandro Dávila</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --card: #f2f1ed; --ink: #111111;
+    --mid: #555555; --muted: #888888; --border: #e5e4e0;
+    --accent: #e4f0e6; --accent-dark: #3a8c52;
+    --radius: 14px; --font: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 56px; }
+  .nav-logo { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+  .nav-back { font-size: 12px; font-weight: 500; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+  .nav-back:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero { padding: 64px 40px 0; max-width: 1100px; margin: 0 auto; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); text-decoration: none; margin-bottom: 40px; transition: color 0.15s; }
+  .back-link:hover { color: var(--ink); }
+  .hero-meta { display: flex; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .hero-title { font-size: clamp(36px, 5vw, 58px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px; }
+  .hero-subtitle { font-size: 17px; color: var(--mid); line-height: 1.6; max-width: 600px; margin-bottom: 40px; }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 48px; }
+  .tag { font-size: 11px; font-weight: 500; color: var(--muted); background: var(--card); border: 0.5px solid var(--border); border-radius: 100px; padding: 4px 12px; }
+
+  /* HERO BANNER */
+  .hero-banner { background: var(--accent); border-radius: 16px; height: 480px; display: flex; align-items: center; justify-content: center; margin: 0 40px; max-width: calc(1100px - 0px); position: relative; overflow: hidden; }
+  .placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .placeholder-icon { opacity: 0.3; }
+  .placeholder-label { font-size: 11px; font-weight: 500; color: var(--accent-dark); opacity: 0.5; letter-spacing: 0.08em; text-transform: uppercase; font-family: monospace; }
+
+  /* CONTENT WRAP */
+  .content { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+  /* SECTION */
+  .section { padding: 72px 0; border-top: 0.5px solid var(--border); }
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 28px; }
+  .section-label::before { content: '↳'; }
+  .section-heading { font-size: clamp(24px, 3vw, 34px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+  .section-body { font-size: 15px; color: var(--mid); line-height: 1.75; max-width: 640px; }
+  .section-body p + p { margin-top: 14px; }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .two-col.flip { direction: rtl; }
+  .two-col.flip > * { direction: ltr; }
+
+  /* IMAGE PLACEHOLDER */
+  .img-placeholder { background: var(--card); border-radius: var(--radius); border: 0.5px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .img-placeholder.tall { height: 320px; }
+  .img-placeholder.short { height: 200px; }
+  .img-placeholder.full { height: 260px; width: 100%; }
+  .ph-label { font-family: monospace; font-size: 10px; color: var(--muted); opacity: 0.6; text-align: center; padding: 0 16px; }
+  .ph-icon { opacity: 0.2; }
+
+  /* PROCESS STEPS */
+  .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .process-step { background: var(--card); border-radius: var(--radius); padding: 24px 22px; border: 0.5px solid var(--border); }
+  .step-num { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
+  .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
+  .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  /* METRICS */
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
+  .metric-card { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 28px 24px; }
+  .metric-num { font-size: 40px; font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 8px; color: #fff; }
+  .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
+
+  /* NEXT PROJECT */
+  .next-project { background: var(--card); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; margin: 56px 0; text-decoration: none; border: 0.5px solid var(--border); transition: background 0.2s; }
+  .next-project:hover { background: #eceae5; }
+  .next-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .next-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: var(--ink); }
+  .next-arrow { font-size: 28px; color: var(--muted); }
+
+  /* FOOTER */
+  footer { border-top: 0.5px solid var(--border); padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 11px; color: #bbb; }
+  .footer-nav { display: flex; gap: 24px; }
+  .footer-nav a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .footer-nav a:hover { color: var(--ink); }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero-banner { margin: 0 20px; height: 280px; }
+    .two-col { grid-template-columns: 1fr; }
+    .two-col.flip { direction: ltr; }
+    .process-steps { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: 1fr; }
+    .next-project { flex-direction: column; align-items: flex-start; gap: 16px; }
+    footer { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../Portfolio.html"><div class="nav-logo-dot"></div></a>
+  <a class="nav-back" href="../Portfolio.html">← All case studies</a>
+</nav>
+
+<div class="hero">
+  <img src="img/logo-baz.png" alt="BAZ Financial Services" class="reveal" style="height:48px;width:auto;display:block;margin-bottom:32px;">
+  <div class="hero-meta reveal">
+    <div class="hero-meta-item"><span class="meta-label">Client</span><span class="meta-value">BAZ Financial Services</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Role</span><span class="meta-value">Sr. UX Designer (via Wizeline)</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Years</span><span class="meta-value">2024 — 2026</span></div>
+    <div class="hero-meta-item"><span class="meta-label">Platform</span><span class="meta-value">Mobile · iOS & Android</span></div>
+  </div>
+  <h1 class="hero-title reveal">BAZ Financial<br>Services</h1>
+  <p class="hero-subtitle reveal">Redesigning the core loan, onboarding, and complaint flows of a fintech super-app serving millions of underbanked users in Mexico.</p>
+  <div class="hero-tags reveal">
+    <span class="tag">Fintech</span><span class="tag">Banking</span><span class="tag">Mobile</span><span class="tag">Super-app</span>
+  </div>
+</div>
+
+<div class="hero-banner reveal" style="margin: 0 40px; padding: 0; background:#e4f0e6;">
+  <img src="img/baz-overview-real.jpg" alt="BAZ Claims & Report an issue" style="width:100%;height:100%;object-fit:cover;border-radius:16px;">
+</div>
+
+<div class="content">
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <p class="section-label reveal">Overview</p>
+    <div class="two-col">
+      <div class="reveal">
+        <h2 class="section-heading">A super-app for Mexico's underbanked population</h2>
+        <div class="section-body">
+          <p>BAZ is a fintech super-app by Banco Azteca targeting users with limited access to traditional banking. The platform offers loans, payments, and financial services through a single mobile experience.</p>
+          <p>When I joined via Wizeline, the app had significant friction in three core flows: loan application, user onboarding, and complaint reporting — leading to high drop-off rates and a surge in customer service cases.</p>
+          <p>My role was to research, redesign, and validate these flows end-to-end, working closely with product managers, engineers, and business stakeholders.</p>
+        </div>
+      </div>
+      <div class="img-placeholder tall reveal" style="padding:0;overflow:hidden;">
+        <img src="img/baz-screen-0.png" alt="BAZ onboarding" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+
+  <!-- USER JOURNEY -->
+  <div class="section">
+    <p class="section-label reveal">User journey</p>
+    <h2 class="section-heading reveal">Mapping the loan journey end to end</h2>
+    <p class="section-body reveal">I mapped the complete loan journey to expose where users hesitated, dropped off, or lost trust — turning each friction point into a clear design priority for the redesign.</p>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/baz-journey.png" alt="BAZ loan user journey map" style="width:100%;display:block;">
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label reveal">Process</p>
+    <h2 class="section-heading reveal">From research to high-fidelity</h2>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="step-num">01 — Discover</div>
+        <div class="step-title">Research & auditing</div>
+        <div class="step-body">Analyzed existing flows, reviewed analytics data and NPS scores, and conducted 12 user interviews with BAZ customers across 3 Mexican cities to identify pain points.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02 — Define</div>
+        <div class="step-title">Journey mapping & framing</div>
+        <div class="step-body">Mapped the loan application journey, identified 7 critical drop-off points, and defined opportunity areas. Aligned with PMs and stakeholders on scope and success metrics.</div>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03 — Design</div>
+        <div class="step-title">Wireframes & iteration</div>
+        <div class="step-body">Rapid wireframing in Figma, 3 rounds of usability testing, and progressive refinement to high-fidelity. Delivered annotated specs and a component library for engineering.</div>
+      </div>
+    </div>
+
+    <!-- Wireframes placeholder row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+      <div class="img-placeholder short reveal" style="padding:0;overflow:hidden;">
+        <img src="img/baz-wireframe-loan.png" alt="BAZ loan wireframes" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="img-placeholder short reveal" style="padding:0;overflow:hidden;">
+        <img src="img/baz-wireframe-onboarding.png" alt="BAZ onboarding wireframes" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </div>
+
+    <!-- HiFi placeholders -->
+    <div style="margin-top: 48px;" class="reveal">
+      <p style="font-size:13px; font-weight:600; margin-bottom:16px; color:var(--ink);">High-fidelity screens</p>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <div class="img-placeholder reveal" style="height:260px;padding:0;overflow:hidden;">
+          <img src="img/baz-screen-0.png" alt="Onboarding" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="img-placeholder reveal" style="height:260px;padding:0;overflow:hidden;">
+          <img src="img/baz-screen-1.png" alt="Loan" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="img-placeholder reveal" style="height:260px;padding:0;overflow:hidden;">
+          <img src="img/baz-screen-2.png" alt="Complaint" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section">
+    <p class="section-label reveal">Results</p>
+    <h2 class="section-heading reveal">Measurable impact across all three flows</h2>
+    <p class="section-body reveal">The redesigned flows launched in 2025 and showed significant improvement within the first quarter of release across complaint volume, loan conversion, and in-app purchasing behavior.</p>
+
+    <div class="metrics">
+      <div class="metric-card reveal">
+        <div class="metric-num">48%</div>
+        <div class="metric-label">reduction in complaint tickets filed through customer service</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="metric-num">+20%</div>
+        <div class="metric-label">increase in completed loan requests after onboarding redesign</div>
+      </div>
+      <div class="metric-card reveal">
+        <div class="metric-num">+23%</div>
+        <div class="metric-label">growth in in-app purchases within 90 days post-launch</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <a class="next-project reveal" href="Kinedu.html">
+    <div>
+      <div class="next-label">Next case study</div>
+      <div class="next-title">Kinedu — Baby development app</div>
+    </div>
+    <div class="next-arrow">→</div>
+  </a>
+
+</div>
+
+<footer>
+  <span class="footer-copy">© 2026 Alejandro Dávila</span>
+  <nav class="footer-nav">
+    <a href="../Portfolio.html">Home</a>
+    <a href="../Portfolio.html#projects">Case Studies</a>
+    <a href="../Portfolio.html#contact">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
