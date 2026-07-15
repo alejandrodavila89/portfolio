@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejandro Dávila — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --card: #f2f1ed; --ink: #111111;
+    --mid: #555555; --muted: #888888; --border: #e5e4e0;
+    --radius: 10px; --font: 'Inter', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 13px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* HEADER */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+    padding-bottom: 32px;
+    border-bottom: 0.5px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .header-name {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+  .header-summary {
+    font-size: 13px;
+    color: var(--mid);
+    line-height: 1.7;
+    max-width: 520px;
+  }
+  .header-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+    padding-top: 4px;
+  }
+  .contact-item {
+    font-size: 12px;
+    color: var(--mid);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+  }
+  .contact-item:hover { color: var(--ink); }
+  .contact-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  /* STAT STRIP */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+  .stat-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    border: 0.5px solid var(--border);
+  }
+  .stat-num {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .exp-item:first-of-type { border-top: 0.5px solid var(--border); }
+  .exp-role {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .exp-company {
+    font-size: 12px;
+    color: var(--mid);
+    margin-bottom: 10px;
+  }
+  .exp-company span { color: var(--muted); }
+  .exp-years {
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 2px;
+    text-align: right;
+  }
+  .exp-badge {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 100px;
+    padding: 2px 8px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .exp-bullets li {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.55;
+    padding-left: 14px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+    font-size: 11px;
+  }
+  .exp-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  .metric-pill {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: 100px;
+    padding: 3px 9px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .skill-group {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    border: 0.5px solid var(--border);
+  }
+  .skill-group-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .skill-list {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.65;
+  }
+
+  /* TWO COL LAYOUT */
+  .two-col-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  /* EDUCATION */
+  .edu-item {
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .edu-item:first-of-type { border-top: 0.5px solid var(--border); }
+  .edu-degree { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+  .edu-school { font-size: 12px; color: var(--mid); }
+  .edu-year { font-size: 11px; color: var(--muted); }
+
+  /* HIGHLIGHT CARD */
+  .highlight-card {
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+  .highlight-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 12px;
+  }
+  .highlight-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .highlight-item:last-child { margin-bottom: 0; }
+  .highlight-num {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #fff;
+    min-width: 48px;
+    line-height: 1.2;
+  }
+  .highlight-desc { color: #aaa; }
+
+  /* PRINT */
+  @media print {
+    body { padding: 24px 32px; font-size: 11.5px; }
+    .header-name { font-size: 28px; }
+    .stat-num { font-size: 18px; }
+    @page { margin: 0; size: A4; }
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 20px; }
+    .header { grid-template-columns: 1fr; }
+    .header-contact { align-items: flex-start; }
+    .stat-strip { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .two-col-bottom { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1 class="header-name">Alejandro Dávila</h1>
+    <p class="header-title">UX Design Lead · Product Design · 10+ Years</p>
+    <p class="header-summary">I lead design at the intersection of user behavior and business strategy — aligning cross-functional teams on measurable outcomes, building design systems that scale, and turning complex problems into clear, intuitive experiences. Specialist in Fintech, Healthcare, and Education across LATAM and the US.</p>
+  </div>
+  <div class="header-contact">
+    <a class="contact-item" href="mailto:davila.rivera@gmail.com">davila.rivera@gmail.com</a>
+    <a class="contact-item" href="https://linkedin.com/in/alexdavilar" target="_blank">linkedin.com/in/alexdavilar</a>
+    <a class="contact-item" href="https://alexdavilar.com" target="_blank">alexdavilar.com</a>
+    <a class="contact-item">Monterrey, MX · Remote-ready</a>
+    <a class="contact-item">English B2 · Spanish native</a>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-card">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">years designing digital products</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">6</div>
+    <div class="stat-label">industries: Fintech, Health, Edu, Entertainment, Sports, Real Estate</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">1M+</div>
+    <div class="stat-label">users served on products I led design for</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">3×</div>
+    <div class="stat-label">design team growth — from first IC to Lead at Kinedu</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section">
+  <div class="section-title">Experience</div>
+
+  <!-- BAZ -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Sr. UX Designer</div>
+      <div class="exp-company">BAZ Financial Services <span>via Wizeline</span></div>
+      <ul class="exp-bullets">
+        <li>Led end-to-end UX strategy for three critical flows — loan application, onboarding, and complaint reporting — for a fintech super-app serving millions of underbanked users in Mexico.</li>
+        <li>Aligned product, engineering, and business stakeholders on shared success metrics and OKRs before design began. Pushed back on scope additions that didn't address root-cause drop-off.</li>
+        <li>Conducted 12 user interviews across 3 cities, identified 7 critical drop-off points, and ran 3 rounds of usability testing to validate the redesign.</li>
+      </ul>
+      <div class="exp-metrics">
+        <span class="metric-pill">48% fewer complaint tickets</span>
+        <span class="metric-pill">+20% loan completions</span>
+        <span class="metric-pill">+23% in-app purchases</span>
+      </div>
+    </div>
+    <div>
+      <div class="exp-years">2024 — 2026</div>
+      <div class="exp-badge">Fintech · Mobile</div>
+    </div>
+  </div>
+
+  <!-- FARMACIAS / ASSETMARK / SPIN -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Sr. UX Designer</div>
+      <div class="exp-company">Farmacias del Ahorro · Assetmark · Spin Premia <span>via Wizeline</span></div>
+      <ul class="exp-bullets">
+        <li><strong>Farmacias del Ahorro</strong> — Redesigned the e-commerce checkout and restructured product taxonomy for Mexico's largest pharmacy chain (1,700+ stores). Lifted checkout from &lt;30% to 65% completion.</li>
+        <li><strong>Assetmark</strong> — Simplified the highest-frequency advisor workflow from 9 steps across 3 screens to 3 steps on 1 view. Built the design system governing all platform features ($100B+ AUM platform).</li>
+        <li><strong>Spin Premia</strong> — Designed a unified loyalty analytics platform replacing 4 disconnected tools for OXXO's marketing teams, enabling real-time executive visibility into loyalty program performance.</li>
+      </ul>
+      <div class="exp-metrics">
+        <span class="metric-pill">65% checkout rate</span>
+        <span class="metric-pill">75% sales lift</span>
+        <span class="metric-pill">9→3 workflow steps</span>
+        <span class="metric-pill">4→1 platform</span>
+      </div>
+    </div>
+    <div>
+      <div class="exp-years">2022 — 2024</div>
+      <div class="exp-badge">Multi-industry · Web</div>
+    </div>
+  </div>
+
+  <!-- KINEDU -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">UX Product Lead</div>
+      <div class="exp-company">Kinedu</div>
+      <ul class="exp-bullets">
+        <li>Joined as first product designer with no design system, no team, no process. Left 4 years later with a team of 3 designers, a cross-platform design system with 80+ components, and a Figma-to-engineering handoff process running independently.</li>
+        <li>Hired, onboarded, and managed a design team. Ran weekly design critiques, defined documentation standards, and mentored junior designers through structured feedback cycles.</li>
+        <li>Partnered with CEO and PMs to align design strategy with business goals. Challenged feature requests with user data and defended prioritization to leadership when needed.</li>
+        <li>Led design across iOS, Android, and Web simultaneously as the product expanded into Enterprise and new markets — serving 1M+ monthly active users with a 3-person design team.</li>
+      </ul>
+      <div class="exp-metrics">
+        <span class="metric-pill">1M+ MAU</span>
+        <span class="metric-pill">3× team growth</span>
+        <span class="metric-pill">80+ components</span>
+        <span class="metric-pill">3 platforms</span>
+      </div>
+    </div>
+    <div>
+      <div class="exp-years">2018 — 2022</div>
+      <div class="exp-badge">Education · Lead</div>
+    </div>
+  </div>
+
+  <!-- SPORTWEY -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Chief Designer</div>
+      <div class="exp-company">Sportwey</div>
+      <ul class="exp-bullets">
+        <li>Defined brand identity, product architecture, and all screens for a sports organization app — built from zero as the sole designer.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="exp-years">2015 — 2017</div>
+      <div class="exp-badge">Sports · Branding</div>
+    </div>
+  </div>
+
+  <!-- ECDEVELOPMENT -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">UI/UX Designer</div>
+      <div class="exp-company">ECDevelopment</div>
+      <ul class="exp-bullets">
+        <li>Designed digital products for agency clients across real estate, entertainment, and services. Managed multiple simultaneous projects with direct client communication.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="exp-years">2016 — 2018</div>
+      <div class="exp-badge">Agency</div>
+    </div>
+  </div>
+
+  <!-- MIGESA -->
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Web Designer</div>
+      <div class="exp-company">Migesa</div>
+      <ul class="exp-bullets">
+        <li>Designed and maintained web interfaces for internal and external clients. First professional design role.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="exp-years">2013 — 2016</div>
+      <div class="exp-badge">Web</div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS + IMPACT SIDE BY SIDE -->
+<div class="two-col-bottom">
+  <div>
+    <div class="section">
+      <div class="section-title">Skills</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Design</div>
+          <div class="skill-list">UX Research · Journey Mapping · Wireframing · Interaction Design · Prototyping · Usability Testing · Visual Design</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Systems</div>
+          <div class="skill-list">Design Systems · Component Libraries · Design Tokens · Figma · Design–Dev Handoff · Governance</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Leadership</div>
+          <div class="skill-list">Team Management · Mentoring · Stakeholder Alignment · Roadmap Strategy · Cross-functional Facilitation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Tools</div>
+      <div class="skill-group" style="grid-column: span 3;">
+        <div class="skill-list">Figma · FigJam · Sketch · Adobe XD · Principle · Zeplin · Notion · Jira · Miro · Hotjar · HTML / CSS</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section">
+      <div class="section-title">Key Impact</div>
+      <div class="highlight-card">
+        <div class="highlight-title">Selected outcomes</div>
+        <div class="highlight-item">
+          <div class="highlight-num">48%</div>
+          <div class="highlight-desc">reduction in complaint tickets at BAZ — directly reducing customer service operational overhead</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">75%</div>
+          <div class="highlight-desc">improvement in online sales for Farmacias del Ahorro after checkout and IA redesign</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">9→3</div>
+          <div class="highlight-desc">steps to complete the most frequent Assetmark advisor task — validated in testing</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">1M+</div>
+          <div class="highlight-desc">monthly active users served with a 3-person design team at Kinedu</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Education</div>
+      <div class="edu-item">
+        <div class="edu-degree">B.A. Graphic Design</div>
+        <div class="edu-school">UANE · Monterrey, NL</div>
+        <div class="edu-year">2010 — 2014</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

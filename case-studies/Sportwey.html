@@ -45,6 +45,14 @@
   .img-placeholder.short { height: 200px; }
   .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
   .process-step { background: var(--card); border-radius: var(--radius); padding: 24px 22px; border: 0.5px solid var(--border); }
+  .process-step.dark { background: #030C18; border-color: #030C18; }
+  .process-step.dark .step-num { color: #555; }
+  .process-step.dark .step-title { color: #fff; }
+  .process-step.dark .step-body { color: #888; }
+  .process-step.green { background: #A4DC5D; border-color: #A4DC5D; }
+  .process-step.green .step-num { color: rgba(0,0,0,0.45); }
+  .process-step.green .step-title { color: #111; }
+  .process-step.green .step-body { color: rgba(0,0,0,0.6); }
   .step-num { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 10px; }
   .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
   .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
@@ -54,6 +62,12 @@
   .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
   .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
   .role-card { background: var(--card); border-radius: var(--radius); padding: 20px 22px; border: 0.5px solid var(--border); }
+  .role-card.dark { background: #030C18; border-color: #030C18; }
+  .role-card.dark .role-card-title { color: #fff; }
+  .role-card.dark .role-card-body { color: #888; }
+  .role-card.green { background: #A4DC5D; border-color: #A4DC5D; }
+  .role-card.green .role-card-title { color: #111; }
+  .role-card.green .role-card-body { color: rgba(0,0,0,0.6); }
   .role-card-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
   .role-card-body { font-size: 12.5px; color: var(--mid); line-height: 1.55; }
   .next-project { background: var(--card); border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: space-between; margin: 56px 0; text-decoration: none; border: 0.5px solid var(--border); transition: background 0.2s; }
@@ -120,19 +134,19 @@
     </div>
 
     <div class="role-grid" style="margin-top:48px;">
-      <div class="role-card reveal">
+      <div class="role-card green reveal">
         <div class="role-card-title">Brand identity</div>
         <div class="role-card-body">Created the full visual identity from scratch — logo, color palette, typography, and brand guidelines.</div>
       </div>
-      <div class="role-card reveal">
+      <div class="role-card dark reveal">
         <div class="role-card-title">Product architecture</div>
         <div class="role-card-body">Defined the structure of the entire product — how players, teams, and leagues connect and navigate.</div>
       </div>
-      <div class="role-card reveal">
+      <div class="role-card dark reveal">
         <div class="role-card-title">Design system</div>
         <div class="role-card-body">Built the component library and UI patterns that all product screens were designed from.</div>
       </div>
-      <div class="role-card reveal">
+      <div class="role-card green reveal">
         <div class="role-card-title">Design leadership</div>
         <div class="role-card-body">As Chief Designer, owned the design vision and direction across brand and product.</div>
       </div>
@@ -154,42 +168,39 @@
     <p class="section-label reveal">Process</p>
     <h2 class="section-heading reveal">From blank canvas to full product</h2>
     <div class="process-steps">
-      <div class="process-step reveal">
+      <div class="process-step dark reveal">
         <div class="step-num">01 — Brand</div>
         <div class="step-title">Identity foundation</div>
         <div class="step-body">Defined the brand from zero — logo, color system, typography, and tone. Established a visual language that felt energetic and sports-driven.</div>
       </div>
-      <div class="process-step reveal">
+      <div class="process-step green reveal">
         <div class="step-num">02 — Architecture</div>
         <div class="step-title">Product structure</div>
         <div class="step-body">Mapped the product architecture — how users, teams, and competitions relate — and designed the core navigation and flows.</div>
       </div>
-      <div class="process-step reveal">
+      <div class="process-step dark reveal">
         <div class="step-num">03 — System</div>
         <div class="step-title">Design system & UI</div>
         <div class="step-body">Built a reusable component library and applied it to design the full set of product screens across mobile and web.</div>
       </div>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
-      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/sportwey-branding.png" alt="Brand identity" style="width:100%;height:100%;object-fit:cover;"></div>
-      <div class="img-placeholder short reveal" style="padding:0;"><img src="img/sportwey-screen-1.png" alt="Teams screen" style="width:100%;height:100%;object-fit:cover;"></div>
-    </div>
-
-    <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/sportwey-screen-0.png" alt="Home" style="width:100%;height:100%;object-fit:cover;"></div>
-      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/sportwey-screen-1.png" alt="Teams" style="width:100%;height:100%;object-fit:cover;"></div>
-      <div class="img-placeholder reveal" style="height:260px;padding:0;"><img src="img/sportwey-screen-2.png" alt="Profile" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="reveal" style="margin-top:32px;border-radius:var(--radius);overflow:hidden;border:0.5px solid var(--border);">
+      <img src="img/sportwey-branding.png" alt="Sportwey brand guidelines" style="width:100%;display:block;">
     </div>
   </div>
 
   <div class="section">
     <p class="section-label reveal">Results</p>
-    <h2 class="section-heading reveal">A complete brand and product, built solo</h2>
-    <p class="section-body reveal">As Chief Designer, I delivered a cohesive brand and product from nothing — establishing the foundation the company built its sports platform on.</p>
-    <div class="metrics">
-      <div class="metric-card reveal"><div class="metric-num">Built from scratch</div><div class="metric-label">brand identity, product architecture, and design system from a blank canvas</div></div>
-      <div class="metric-card reveal"><div class="metric-num">Chief Designer</div><div class="metric-label">owned the full design vision across brand and product</div></div>
+    <h2 class="section-heading reveal">One project. Every hat.</h2>
+    <p class="section-body reveal">Sportwey didn't have the budget for a full team — so the project demanded wearing every hat at once. Not out of choice, but out of necessity. What started as a design role became a full-spectrum ownership experience across disciplines.</p>
+    <div class="metrics" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
+      <div class="metric-card reveal" style="background:#030C18;color:#fff;"><div class="metric-num" style="font-size:22px;">Chief Designer</div><div class="metric-label" style="color:#555;">Owned the full creative vision — brand, product, and system — from day one to launch</div></div>
+      <div class="metric-card reveal" style="background:#A4DC5D;color:#111;"><div class="metric-num" style="font-size:22px;">UX & UI</div><div class="metric-label" style="color:rgba(0,0,0,0.55);">Designed every flow, screen, and interaction pattern across mobile and web</div></div>
+      <div class="metric-card reveal" style="background:#030C18;color:#fff;"><div class="metric-num" style="font-size:22px;">Brand & Marketing</div><div class="metric-label" style="color:#555;">Built the identity, tone of voice, and visual language used across all brand touchpoints</div></div>
+      <div class="metric-card reveal" style="background:#A4DC5D;color:#111;"><div class="metric-num" style="font-size:22px;">Web Designer</div><div class="metric-label" style="color:rgba(0,0,0,0.55);">Designed the product's web experience alongside the mobile platform</div></div>
+      <div class="metric-card reveal" style="background:#030C18;color:#fff;"><div class="metric-num" style="font-size:22px;">Design Lead</div><div class="metric-label" style="color:#555;">Made architectural decisions, defined priorities, and aligned design with business goals</div></div>
+      <div class="metric-card reveal" style="background:#A4DC5D;color:#111;"><div class="metric-num" style="font-size:22px;">Design Systems</div><div class="metric-label" style="color:rgba(0,0,0,0.55);">Built the component library and visual standards that kept the product consistent at scale</div></div>
     </div>
   </div>
 
