@@ -348,16 +348,34 @@
   .project-card:hover { transform: translateY(-2px); background: #eceae5; }
 
   .project-thumb {
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 220px;
     position: relative;
     overflow: hidden;
   }
-
-  .project-thumb svg {
-    opacity: 0.7;
+  .project-thumb img.thumb-cover {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .project-card:hover .thumb-cover { transform: scale(1.04); }
+  .thumb-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid rgba(0,0,0,0.08);
+  }
+  .thumb-badge img {
+    height: 22px;
+    width: auto;
+    display: block;
   }
 
   .project-body {
@@ -940,8 +958,9 @@
 
     <!-- Card 1 — BAZ -->
     <a class="project-card reveal" href="case-studies/BAZ.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#37C800;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/baz-icon.png" alt="BAZ Financial Services" style="width:72px;height:72px;object-fit:contain;">
+      <div class="project-thumb" style="background:#37C800;">
+        <img class="thumb-cover" src="case-studies/img/baz-overview-real.jpg" alt="BAZ Financial Services">
+        <div class="thumb-badge"><img src="case-studies/img/baz-icon.png" alt="BAZ"></div>
       </div>
       <div class="project-body">
         <div class="project-name">BAZ Financial Services</div>
@@ -961,8 +980,9 @@
 
     <!-- Card 2 — Kinedu -->
     <a class="project-card reveal" href="case-studies/Kinedu.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#1A8FD1;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/kinedu-logo-icon.jpg" alt="Kinedu" style="width:72px;height:72px;object-fit:contain;border-radius:12px;">
+      <div class="project-thumb" style="background:#1A8FD1;">
+        <img class="thumb-cover" src="case-studies/img/kinedu-hero.png" alt="Kinedu">
+        <div class="thumb-badge"><img src="case-studies/img/kinedu-logo-icon.jpg" alt="Kinedu" style="border-radius:4px;"></div>
       </div>
       <div class="project-body">
         <div class="project-name">Kinedu</div>
@@ -982,8 +1002,9 @@
 
     <!-- Card 3 — Spin Premia -->
     <a class="project-card reveal" href="case-studies/SpinPreemia.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#00B7CF;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/spin-icon.png" alt="Spin Premia" style="width:72px;height:72px;object-fit:contain;">
+      <div class="project-thumb" style="background:#00707A;">
+        <img class="thumb-cover" src="case-studies/img/Spin-Hero2.jpg" alt="Spin Premia">
+        <div class="thumb-badge"><img src="case-studies/img/spin-icon.png" alt="Spin Premia"></div>
       </div>
       <div class="project-body">
         <div class="project-name">Spin Premia</div>
@@ -1002,8 +1023,9 @@
 
     <!-- Card 4 — Sportwey -->
     <a class="project-card reveal" href="case-studies/Sportwey.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#444444;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/sportwey-icon.png" alt="Sportwey" style="width:72px;height:72px;object-fit:contain;">
+      <div class="project-thumb" style="background:#444444;">
+        <img class="thumb-cover" src="case-studies/img/sportwey-hero.png" alt="Sportwey">
+        <div class="thumb-badge"><img src="case-studies/img/sportwey-icon.png" alt="Sportwey"></div>
       </div>
       <div class="project-body">
         <div class="project-name">Sportwey</div>
@@ -1022,8 +1044,9 @@
 
     <!-- Card 5 — Farmacias -->
     <a class="project-card reveal" href="case-studies/Farmacias.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#001588;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/farmacias-icon.png" alt="Farmacias del Ahorro" style="width:72px;height:72px;object-fit:contain;">
+      <div class="project-thumb" style="background:#001588;">
+        <img class="thumb-cover" src="case-studies/img/farmacias-hero.png" alt="Farmacias del Ahorro">
+        <div class="thumb-badge"><img src="case-studies/img/farmacias-icon.png" alt="Farmacias del Ahorro"></div>
       </div>
       <div class="project-body">
         <div class="project-name">Farmacias del Ahorro</div>
@@ -1043,8 +1066,9 @@
 
     <!-- Card 6 — Assetmark -->
     <a class="project-card reveal" href="case-studies/Assetmark.html" style="text-decoration:none;display:block;">
-      <div class="project-thumb" style="background:#004E7C;display:flex;align-items:center;justify-content:center;">
-        <img src="case-studies/img/assetmark-icon.png" alt="Assetmark" style="width:72px;height:72px;object-fit:contain;">
+      <div class="project-thumb" style="background:#004E7C;">
+        <img class="thumb-cover" src="case-studies/img/assetmark-hero.png" alt="Assetmark">
+        <div class="thumb-badge"><img src="case-studies/img/assetmark-icon.png" alt="Assetmark"></div>
       </div>
       <div class="project-body">
         <div class="project-name">Assetmark</div>
