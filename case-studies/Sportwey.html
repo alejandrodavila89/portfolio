@@ -57,6 +57,7 @@
   .step-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 8px; }
   .step-body { font-size: 13px; color: var(--mid); line-height: 1.6; }
   .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 32px; }
+  .metrics-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 32px; }
   .metric-card { background: var(--ink); color: #fff; border-radius: var(--radius); padding: 32px 28px; }
   .metric-num { font-size: 38px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 8px; }
   .metric-label { font-size: 12px; color: #888; line-height: 1.5; }
@@ -85,7 +86,7 @@
   @media (max-width: 768px) {
     nav, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
     .hero-banner { margin: 0 20px; height: 280px; }
-    .two-col, .metrics, .process-steps, .role-grid { grid-template-columns: 1fr; }
+    .two-col, .metrics, .metrics-3, .process-steps, .role-grid { grid-template-columns: 1fr; }
     .next-project { flex-direction: column; align-items: flex-start; gap: 16px; }
     footer { flex-direction: column; gap: 12px; }
   }
@@ -194,7 +195,7 @@
     <p class="section-label reveal">Results</p>
     <h2 class="section-heading reveal">One project. Every hat.</h2>
     <p class="section-body reveal">Sportwey didn't have the budget for a full team — so the project demanded wearing every hat at once. Not out of choice, but out of necessity. What started as a design role became a full-spectrum ownership experience across disciplines.</p>
-    <div class="metrics" style="grid-template-columns: repeat(3, 1fr); margin-top: 32px;">
+    <div class="metrics-3">
       <div class="metric-card reveal" style="background:#030C18;color:#fff;"><div class="metric-num" style="font-size:22px;">Chief Designer</div><div class="metric-label" style="color:#555;">Owned the full creative vision — brand, product, and system — from day one to launch</div></div>
       <div class="metric-card reveal" style="background:#A4DC5D;color:#111;"><div class="metric-num" style="font-size:22px;">UX & UI</div><div class="metric-label" style="color:rgba(0,0,0,0.55);">Designed every flow, screen, and interaction pattern across mobile and web</div></div>
       <div class="metric-card reveal" style="background:#030C18;color:#fff;"><div class="metric-num" style="font-size:22px;">Brand & Marketing</div><div class="metric-label" style="color:#555;">Built the identity, tone of voice, and visual language used across all brand touchpoints</div></div>
